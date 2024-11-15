@@ -58,26 +58,9 @@ public class JDBConnect {
 	}
 
 	}
-	public JDBConnect(ServletContext application) {
-		try {
-			/*
-			 내장객체를 매개변수를 통해 전달받았으므로 Java클래스 내에서 web,xml을 접근할 수 있다.
-			 그러면 JSP에서 DB연결을 위해 반복적으로 사용했던 코드를 줄일 수 있다.
-			  */
-			String driver = application.getInitParameter("OracleDriver");
-			Class.forName(driver);
-			String url = application.getInitParameter("OracleURL");
-			String id = application.getInitParameter("OracleId");
-			String pwd = application.getInitParameter("OraclePwd");
-			con = DriverManager.getConnection(url, id, pwd);
-			
-			System.out.println("DB 연결 성공(인수 생성자2)");
-			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
+
+	
 
 	}
 
