@@ -1,5 +1,7 @@
 package membership;
 
+import java.sql.Date;
+
 /*
 DTO(Data Transfer Object)
 : JSP와 Java파일간에 데이터를 전달하기 위한 객체로 자바빈 규약에 의해
@@ -14,11 +16,59 @@ DTO(Data Transfer Object)
 */
 public class MemberDTO {
 	//멤버변수 : member 테이블의 컬럼과 동일하게 생성 
-    private String id;
-    private String pass;
-    private String name;
-    private String regidate;
     
+    private String username;
+    private String password;
+    private String name;
+    private String email;
+    private String phone;
+    private Date created_at;
+    private Date updated_at;
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public Date getCreated_at() {
+		return created_at;
+	}
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
+	}
+	public Date getUpdated_at() {
+		return updated_at;
+	}
+	public void setUpdated_at(Date updated_at) {
+		this.updated_at = updated_at;
+	}
+    
+	
     /*
     생성자의 경우 꼭 필요한 경우가 아니라면 생성하지 않는다. 
     생성자를 직접 정의하지 않으면 컴파일러에 의해 디폴트(기본) 생성자가
@@ -29,28 +79,8 @@ public class MemberDTO {
     정보은닉된 멤버변수에 접근하기 위해 public으로 정의된 
     getter/setter 메서드를 정의한다. 
      */
-    public String getId() {
-        return id;
-    }
-	public void setId(String id) {
-        this.id = id;
-    }
-    public String getPass() {
-        return pass;
-    }
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getRegidate() {
-        return regidate;
-    }
-    public void setRegidate(String regidate) {
-        this.regidate = regidate;
-    }
+	
+
+
+ 
 }

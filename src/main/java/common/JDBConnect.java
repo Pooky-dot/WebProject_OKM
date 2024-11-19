@@ -24,7 +24,7 @@ public class JDBConnect {
             //커넥션URL 생성 
             String url = "jdbc:oracle:thin:@localhost:1521:xe";
             //계정의 아이디와 비번 
-            String id = "education";
+            String id = "webproject_db";
             String pwd = "1234"; 
             //데이터베이스 연결 시도 
             con = DriverManager.getConnection(url, id, pwd);

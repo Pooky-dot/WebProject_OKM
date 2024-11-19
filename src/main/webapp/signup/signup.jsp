@@ -3,34 +3,66 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>로그인</title>
+    <title>회원가입</title>
     <!-- CSS 및 스타일 -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
     <link href="../css/style.css" rel="stylesheet" />
     <link href="../css/responsive.css" rel="stylesheet" />
-    <style>
-        .login-container {
-            max-width: 25%; /* 화면의 25% 크기로 설정 */
-            margin: 50px auto; /* 가운데 정렬 및 여백 */
+     <style>
+        .registration-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
         }
-        .login-title {
-            text-align: center; /* 제목 가운데 정렬 */
-            margin-bottom: 30px;
+        .registration-title {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        .btn-container {
+            text-align: center;
+        }
+        .btn-container .btn {
+            margin: 10px;
         }
     </style>
-    <script>
-        // 로그인 폼의 입력값을 서버로 전송하기 전에 검증하기 위한 함수
+   <script>
         function validateForm(form) {
-            if (!form.username.value) {
-                alert("아이디를 입력하세요.");
-                form.username.focus();
+            // Form validation logic
+            if (!form.user_id.value || form.user_id.value.length < 6 || form.user_id.value.length > 20) {
+                alert("아이디는 6~20자 이내로 입력해주세요.");
+                form.user_id.focus();
                 return false;
             }
-            if (form.password.value == "") {
-                alert("비밀번호를 입력하세요.");
-                form.password.focus();
+            if (form.user_pw.value.length < 8 || form.user_pw.value.length > 20) {
+                alert("비밀번호는 8~20자 이내로 입력해주세요.");
+                form.user_pw.focus();
                 return false;
             }
+            if (form.user_pw.value !== form.user_pw_check.value) {
+                alert("비밀번호가 일치하지 않습니다.");
+                form.user_pw_check.focus();
+                return false;
+            }
+            if (!form.name.value) {
+                alert("이름을 입력해주세요.");
+                form.name.focus();
+                return false;
+            }
+            if (!form.phone.value || !/^[0-9]{11}$/.test(form.phone.value)) {
+                alert("올바른 휴대폰 번호를 입력해주세요.");
+                form.phone.focus();
+                return false;
+            }
+            return true;
         }
     </script>
 </head>
@@ -93,39 +125,57 @@
     <!-- end header section -->
   </div>
 
-  <!-- 로그인 섹션 -->
-  <div class="container login-container">
-    <h2 class="login-title">로그인</h2>
+  <!-- 회원가입 섹션 -->
+   <div class="container registration-container">
+        <h2 class="registration-title">회원가입</h2>
+        <p>회원이 되어 다양한 혜택을 경험해 보세요!</p>
 
-    <span style="color: red; font-size: 1.2em;">
-      <!-- 삼항연산자를 통해 로그인 오류 메시지 출력 -->
-      <%= request.getAttribute("LoginErrMsg") == null ? "" : request.getAttribute("LoginErrMsg") %>
-    </span>
+        <form method="post" action="registerProcess.jsp" onsubmit="return validateForm(this);">
+            <div class="form-group">
+                <label for="user_id">아이디</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="아이디 입력 (6~20자)" required>
+                <button type="button" class="btn btn-secondary">중복 확인</button>
+            </div>
 
-    <% 
-    // 세션에 사용자 정보가 없는 경우 로그인 폼 출력
-    if (session.getAttribute("UserId") == null) { 
-    %>
-      <form method="post" action="loginProcess.jsp" onsubmit="return validateForm(this);">
+            <div class="form-group">
+                <label for="user_pw">비밀번호</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호 입력 (8~20자)" required>
+            </div>
 
-        <div class="form-group">
-          <input type="text" class="form-control" id="user_id" name="user_id" placeholder="아이디 입력" required>
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" id="user_pw" name="user_pw" placeholder="비밀번호 입력" required>
-        </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
-      </form>
-    <% 
-    } else { 
-    %>
-      <!-- 로그인된 상태에서 사용자 환영 메시지와 로그아웃 링크 출력 -->
-      <p><%= session.getAttribute("UserName") %> 회원님, 로그인하셨습니다.</p>
-      <a href="logout.jsp">[로그아웃]</a>
-    <% 
-    } 
-    %>
-  </div>
+            <div class="form-group">
+                <label for="user_pw_check">비밀번호 확인</label>
+                <input type="password" class="form-control" id="user_pw_check" name="user_pw_check" placeholder="비밀번호 재입력" required>
+            </div>
+
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력해주세요" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">전화번호</label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="휴대폰 번호 입력" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">이메일 주소</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="이메일 주소" required>
+                    <div class="input-group-append">
+                        <span class="input-group-text">@</span>
+                        <input type="text" class="form-control" value="naver.com" readonly>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <div class="btn-container">
+                <button type="submit" class="btn btn-primary">가입하기</button>
+                <button type="reset" class="btn btn-warning">가입취소</button>
+            </div>
+        </form>
+    </div>
 
   <!-- footer section -->
   <footer class="footer_section">
@@ -193,3 +243,4 @@
 
 </body>
 </html>
+

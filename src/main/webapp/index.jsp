@@ -106,7 +106,7 @@
    			 로그인
   		  </a>
           <!-- 기존 회원가입 버튼 -->
-          <a href="" class="order_online">
+          <a href="signup/signup.jsp" class="order_online">
             회원가입
           </a>
         </div>
