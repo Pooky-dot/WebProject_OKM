@@ -52,7 +52,17 @@
               <a href="" class="user_link"><i class="fa fa-user"></i></a>
               <a class="cart_link" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456.029 456.029"></svg></a>
               <form class="form-inline"><button class="btn nav_search-btn"><i class="fa fa-search"></i></button></form>
-              <a href="" class="order_online">Order Online</a>
+
+              <%-- 로그인 여부에 따라 로그인/회원가입 혹은 로그아웃 버튼 표시 --%>
+              <%
+                String loggedInUser = (String) session.getAttribute("UserId");
+                if (loggedInUser != null) {
+              %>
+                  <a href="../login/logout.jsp" class="order_online" style="margin-right: 15px;">로그아웃</a>
+              <% } else { %>
+                  <a href="../login/login.jsp" class="order_online" style="margin-right: 15px;">로그인</a>
+                  <a href="../signup/signup.jsp" class="order_online">회원가입</a>
+              <% } %>
             </div>
           </div>
         </nav>
@@ -61,9 +71,9 @@
   </div>
 
   <!-- 메인 콘텐츠 영역 -->
-<div class="content_section">
-  <c:import url="${contentPage}" />
-</div>
+  <div class="content_section">
+    <c:import url="${contentPage}" />
+  </div>
 
   <!-- 푸터 섹션 -->
   <footer class="footer_section">

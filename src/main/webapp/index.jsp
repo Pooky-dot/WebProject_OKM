@@ -101,14 +101,38 @@
               <i class="fa fa-search" aria-hidden="true"></i>
             </button>
           </form>
-          <!-- 로그인 버튼 추가 -->
-           <a href="login/login.jsp" class="order_online" style="margin-right: 15px;">
-   			 로그인
-  		  </a>
-          <!-- 기존 회원가입 버튼 -->
-          <a href="signup/signup.jsp" class="order_online">
+          <%
+// 로그인 여부를 확인하는 코드 추가
+String loggedInUser = (String) session.getAttribute("UserId");
+%>
+
+<!-- 기존 로그인/회원가입 버튼을 로그인 상태에 따라 변경 -->
+<div class="user_option">
+    <a href="" class="user_link">
+        <i class="fa fa-user" aria-hidden="true"></i>
+    </a>
+    <a class="cart_link" href="#">
+        <!-- Cart icon remains unchanged -->
+        ...
+    </a>
+    <form class="form-inline">
+        <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+    </form>
+    <% if (loggedInUser != null) { %>
+        <a href="login/logout.jsp" class="order_online" style="margin-right: 15px;">
+            로그아웃
+        </a>
+    <% } else { %>
+        <a href="login/login.jsp" class="order_online" style="margin-right: 15px;">
+            로그인
+        </a>
+        <a href="signup/signup.jsp" class="order_online">
             회원가입
-          </a>
+        </a>
+    <% } %>
+	</div>
         </div>
       </div>
     </nav>

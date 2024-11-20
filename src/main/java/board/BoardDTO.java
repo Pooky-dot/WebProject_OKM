@@ -3,7 +3,7 @@ package board;
 import java.util.Date;
 
 public class BoardDTO {
-    private Long post_Id;      // 게시글 ID
+    private String post_Id;      // 게시글 ID
     private String username;  // 작성자
     private String board_Type; // 게시판 유형 (예: 자유게시판, Q&A 게시판, 자료실 등)
     private String title;     // 게시글 제목
@@ -15,10 +15,10 @@ public class BoardDTO {
     private String sfile;     // 저장된 파일명
     private long idx;
     private int downcount;
-	public Long getPost_Id() {
+	public String getPost_Id() {
 		return post_Id;
 	}
-	public void setPost_Id(Long post_Id) {
+	public void setPost_Id(String post_Id) {
 		this.post_Id = post_Id;
 	}
 	public String getUsername() {
