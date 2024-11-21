@@ -65,11 +65,37 @@
 <servlet>
     <servlet-name>BoardWrite</servlet-name>
     <servlet-class>board.WriteController</servlet-class>
+    <multipart-config>
+    	<max-file-size>1048576</max-file-size>
+    	<max-request-size>10485760</max-request-size>
+    </multipart-config>
 </servlet>  
 <servlet-mapping>
     <servlet-name>BoardWrite</servlet-name>
     <url-pattern>/board/write.do</url-pattern>
 </servlet-mapping>
+
+<context-param>
+	<param-name>POSTS_PER_PAGE</param-name>
+	<param-value>10</param-value>
+</context-param>
+
+<context-param>
+	<param-name>PAGES_PER_BLOCK</param-name>
+	<param-value>10</param-value>
+</context-param>
+
+<servlet>
+	<servlet-name>BoardListPage</servlet-name>
+	<servlet-class>board.ListPageController</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>BoardListPage</servlet-name>
+	<url-pattern>/board/listPage.do</url-pattern>
+
+</servlet-mapping>
+
+
 
 
 
