@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,10 +12,16 @@
         .login-container {
             max-width: 25%; /* 화면의 25% 크기로 설정 */
             margin: 50px auto; /* 가운데 정렬 및 여백 */
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
         .login-title {
             text-align: center; /* 제목 가운데 정렬 */
             margin-bottom: 30px;
+            font-weight: bold;
+            font-size: 1.8em;
         }
     </style>
     <script>
@@ -43,11 +49,9 @@
     <!-- header section starts -->
     <header class="header_section">
       <div class="container">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
           <a class="navbar-brand" href="../index.jsp">
-            <span>
-              Feane
-            </span>
+            <span>어딜강</span>
           </a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,8 +60,8 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="../index.jsp">Home </a>
+              <li class="nav-item active">
+                <a class="nav-link" href="../index.jsp">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="../menu.jsp">Menu</a>
@@ -65,26 +69,38 @@
               <li class="nav-item">
                 <a class="nav-link" href="../about.jsp">About</a>
               </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="../book.jsp">Book Table <span class="sr-only">(current)</span> </a>
+              <li class="nav-item">
+                <a class="nav-link" href="../book.jsp">Book Table</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="boardDropdown" data-toggle="dropdown">게시판</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="../board/listPage.do">자유게시판</a>
+                  <a class="dropdown-item" href="../board/qnaBoard.jsp">Q&A게시판</a>
+                  <a class="dropdown-item" href="../board/listPage.do">자료게시판</a>
+                </div>
               </li>
             </ul>
+
+            <% 
+              // 로그인 여부를 확인하는 코드 추가
+              String loggedInUser = (String) session.getAttribute("UserId");
+            %>
+
+            <!-- 로그인 상태에 따라 버튼 표시 -->
             <div class="user_option">
-              <a href="" class="user_link">
-                <i class="fa fa-user" aria-hidden="true"></i>
-              </a>
-              <a class="cart_link" href="#">
-                <!-- Cart icon SVG remains unchanged -->
-                ...
-              </a>
-              <form class="form-inline">
-                <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
-              <a href="" class="order_online">
-                Order Online
-              </a>
+              <% if (loggedInUser != null) { %>
+                <a href="../login/logout.jsp" class="order_online" style="margin-right: 15px;">
+                    로그아웃
+                </a>
+              <% } else { %>
+                <a href="../login/login.jsp" class="order_online" style="margin-right: 15px;">
+                    로그인
+                </a>
+                <a href="../signup/signup.jsp" class="order_online">
+                    회원가입
+                </a>
+              <% } %>
             </div>
           </div>
         </nav>
@@ -190,6 +206,16 @@
     </div>
   </footer>
   <!-- footer section -->
+  
+  <!-- jQuery -->
+<script src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
+
+<!-- Popper JS (Bootstrap Dropdown에 필요) -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+<!-- Bootstrap JavaScript -->
+<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+  
 
 </body>
 </html>

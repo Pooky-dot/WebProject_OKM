@@ -69,9 +69,9 @@
           <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="" id="boardDropdown" data-toggle="dropdown">게시판</a>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="./board/listPage.do">자유게시판</a>
-                  <a class="dropdown-item" href="../board/qnaBoard.jsp">Q&A게시판</a>
-                  <a class="dropdown-item" href="../board/listPage.do">자료게시판</a>
+                  <a class="dropdown-item" href="./board/freeboard.do">자유게시판</a>
+                  <a class="dropdown-item" href="./board/qnaBoard.jsp">Q&A게시판</a>
+                  <a class="dropdown-item" href="./board/listPage.do">자료게시판</a>
                 </div>
               </li>
         </ul>

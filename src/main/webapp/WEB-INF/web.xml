@@ -95,6 +95,16 @@
 
 </servlet-mapping>
 
+<servlet>
+	<servlet-name>BoardFB</servlet-name>
+	<servlet-class>board.FBController</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>BoardFB</servlet-name>
+	<url-pattern>/board/freeboard.do</url-pattern>
+
+</servlet-mapping>
+
 
 
 
