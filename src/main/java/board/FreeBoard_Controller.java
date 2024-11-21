@@ -14,14 +14,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import utils.BoardPage;
 
 
-public class FBController extends HttpServlet {
+public class FreeBoard_Controller extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         // DAO 생성
-        FBBoardDAO dao = new FBBoardDAO();
+        FreeBoard_DAO dao = new FreeBoard_DAO();
 
         // 뷰에 전달할 매개변수 저장용 맵 생성
         Map<String, Object> map = new HashMap<String, Object>();
@@ -52,7 +52,7 @@ public class FBController extends HttpServlet {
         map.put("end", end);
         /* 페이지 처리 end */
 
-        List<FBBoardDTO> boardLists = dao.selectListPage(map);
+        List<FreeBoard_DTO> boardLists = dao.selectListPage(map);
         dao.close();
 
         // 뷰에 전달할 매개변수 추가

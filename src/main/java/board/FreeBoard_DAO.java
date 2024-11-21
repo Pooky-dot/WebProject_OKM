@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 import common.DBConnPool;
-import board.FBBoardDTO;
+import board.FreeBoard_DTO;
 
-public class FBBoardDAO extends DBConnPool {
-    public FBBoardDAO() {
+public class FreeBoard_DAO extends DBConnPool {
+    public FreeBoard_DAO() {
         super();
     }
 
@@ -34,8 +34,8 @@ public class FBBoardDAO extends DBConnPool {
     }
 
     // 검색 조건에 맞는 게시물 목록을 반환합니다(페이징 기능 지원).
-    public List<FBBoardDTO> selectList(Map<String,Object> map) {
-        List<FBBoardDTO> board = new Vector<FBBoardDTO>();
+    public List<FreeBoard_DTO> selectList(Map<String,Object> map) {
+        List<FreeBoard_DTO> board = new Vector<FreeBoard_DTO>();
         String query = "SELECT * FROM fbboard ";
         if (map.get("searchWord") != null) {
             query += " WHERE " + map.get("searchField")
@@ -47,7 +47,7 @@ public class FBBoardDAO extends DBConnPool {
             psmt = con.prepareStatement(query);
             rs = psmt.executeQuery();
             while (rs.next()) {
-                FBBoardDTO dto = new FBBoardDTO();
+                FreeBoard_DTO dto = new FreeBoard_DTO();
 
                 dto.setIdx(rs.getString(1));
                 dto.setUsername(rs.getString(2));
@@ -66,7 +66,7 @@ public class FBBoardDAO extends DBConnPool {
         return board;
     }
 
-    public int insertWrite(FBBoardDTO dto) {
+    public int insertWrite(FreeBoard_DTO dto) {
         int result = 0;
         try {
             String query = "INSERT INTO fbboard ( "
@@ -87,8 +87,8 @@ public class FBBoardDAO extends DBConnPool {
     }
 
     // 주어진 일련번호에 해당하는 게시물을 DTO에 담아 반환합니다.
-    public FBBoardDTO selectView(String idx) {
-        FBBoardDTO dto = new FBBoardDTO();  // DTO 객체 생성
+    public FreeBoard_DTO selectView(String idx) {
+        FreeBoard_DTO dto = new FreeBoard_DTO();  // DTO 객체 생성
         String query = "SELECT Bo.*, Me.name FROM fbboard Bo "
         		+ " INNER JOIN users Me ON Bo.username=Me.username"
         		+ " WHERE idx=?";  // 쿼리문 템플릿 준비
@@ -147,7 +147,7 @@ public class FBBoardDAO extends DBConnPool {
     }
 
     // 게시글 데이터를 받아 DB에 저장되어 있던 내용을 갱신합니다.
-    public int updatePost(FBBoardDTO dto) {
+    public int updatePost(FreeBoard_DTO dto) {
         int result = 0;
         try {
             // 쿼리문 템플릿 준비
@@ -172,8 +172,8 @@ public class FBBoardDAO extends DBConnPool {
         return result;
     }
 
-    public List<FBBoardDTO> selectListPage(Map<String,Object> map) {
-        List<FBBoardDTO> board = new Vector<FBBoardDTO>();
+    public List<FreeBoard_DTO> selectListPage(Map<String,Object> map) {
+        List<FreeBoard_DTO> board = new Vector<FreeBoard_DTO>();
         String query = 
                 " SELECT * FROM ( "
                 + " SELECT Tb.*, ROWNUM rNUM FROM ( "
@@ -194,7 +194,7 @@ public class FBBoardDAO extends DBConnPool {
             rs = psmt.executeQuery();
 
             while (rs.next()) {
-                FBBoardDTO dto = new FBBoardDTO();
+                FreeBoard_DTO dto = new FreeBoard_DTO();
 
                 dto.setIdx(rs.getString(1));
                 dto.setUsername(rs.getString(2));

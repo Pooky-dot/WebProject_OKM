@@ -171,8 +171,8 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="boardDropdown" data-toggle="dropdown">게시판</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="${pageContext.request.contextPath}/board/listPage.do">자유게시판</a>
-              <a class="dropdown-item" href="${pageContext.request.contextPath}/board/qnaBoard.jsp">Q&A게시판</a>
+              <a class="dropdown-item" href="${pageContext.request.contextPath}/board/freeboard.do">자유게시판</a>
+              <a class="dropdown-item" href="${pageContext.request.contextPath}/board/qnaboard.jsp">Q&A게시판</a>
               <a class="dropdown-item" href="${pageContext.request.contextPath}/board/listPage.do">자료게시판</a>
             </div>
           </li>

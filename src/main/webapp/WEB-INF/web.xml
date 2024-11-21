@@ -97,13 +97,22 @@
 
 <servlet>
 	<servlet-name>BoardFB</servlet-name>
-	<servlet-class>board.FBController</servlet-class>
+	<servlet-class>board.FreeBoard_Controller</servlet-class>
 </servlet>
 <servlet-mapping>
 	<servlet-name>BoardFB</servlet-name>
 	<url-pattern>/board/freeboard.do</url-pattern>
-
 </servlet-mapping>
+
+<servlet>
+    <servlet-name>FreeBoardWrite</servlet-name>
+    <servlet-class>board.FreeBoard_WriteController</servlet-class>
+</servlet>  
+<servlet-mapping>
+    <servlet-name>FreeBoardWrite</servlet-name>
+    <url-pattern>/board/freeboardwrite.do</url-pattern>
+</servlet-mapping>
+
 
 
 

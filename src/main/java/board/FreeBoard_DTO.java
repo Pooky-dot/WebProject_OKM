@@ -1,6 +1,6 @@
 package board;
 
-public class FBBoardDTO {
+public class FreeBoard_DTO {
     // 멤버 변수 선언
     private String idx; 
     private String username;
