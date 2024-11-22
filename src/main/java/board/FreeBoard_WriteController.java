@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpSession;
 
 import utils.JSFunction;
 
-@WebServlet("/board/freeBoardWrite.do")
+
 public class FreeBoard_WriteController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -25,7 +25,7 @@ public class FreeBoard_WriteController extends HttpServlet {
             return;
         }
 
-        req.getRequestDispatcher("/board/FreeBoardWrite.jsp").forward(req, resp);
+        req.getRequestDispatcher("/board/FreeBoard_Write.jsp").forward(req, resp);
     }
 
     @Override

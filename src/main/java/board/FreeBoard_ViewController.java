@@ -17,7 +17,7 @@ public class FreeBoard_ViewController extends HttpServlet {
             throws ServletException, IOException {
         // 게시물 불러오기
         FreeBoard_DAO dao = new FreeBoard_DAO();
-        String idx = req.getParameter("idx");
+        String idx = req.getParameter("idx");        
         dao.updateVisitCount(idx);  // 조회수 1 증가
         FreeBoard_DTO dto = dao.selectView(idx);
         dao.close();
@@ -27,6 +27,6 @@ public class FreeBoard_ViewController extends HttpServlet {
 
         // 게시물(dto) 저장 후 뷰로 포워드
         req.setAttribute("dto", dto);
-        req.getRequestDispatcher("/board/FreeBoardView.jsp").forward(req, resp);
+        req.getRequestDispatcher("/board/FreeBoard_View.jsp").forward(req, resp);
     }
 }

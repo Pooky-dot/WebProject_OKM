@@ -84,16 +84,11 @@
         <!-- 로그인 상태에 따라 버튼 표시 -->
         <div class="user_option">
           <% if (loggedInUser != null) { %>
-              <a href="login/logout.jsp" class="order_online" style="margin-right: 15px;">
-                  로그아웃
-              </a>
+              <a href="memberEdit/MemberDetail.jsp" class="order_online" style="margin-right: 15px;">마이페이지</a>
+              <a href="login/logout.jsp" class="order_online" style="margin-right: 15px;">로그아웃</a>
           <% } else { %>
-              <a href="login/login.jsp" class="order_online" style="margin-right: 15px;">
-                  로그인
-              </a>
-              <a href="signup/signup.jsp" class="order_online">
-                  회원가입
-              </a>
+              <a href="login/login.jsp" class="order_online" style="margin-right: 15px;">로그인</a>
+              <a href="signup/signup.jsp" class="order_online">회원가입</a>
           <% } %>
         </div>
       </div>

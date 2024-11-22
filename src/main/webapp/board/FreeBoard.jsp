@@ -235,17 +235,13 @@
                     ${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index)}   
                 </td>
                 <td align="left">
-                    <a href="../board/view.do?idx=${ row.idx }">
+                    <a href="../board/freeboardview.do?idx=${ row.idx }">
                         ${ row.title }</a> 
                 </td> 
                 <td>${ row.username }</td>
                 <td>${ row.visitcount }</td>
                 <td>${ row.postdate }</td>
-                <td>
-                <c:if test="${ not empty row.ofile }">
-                    <a href="../board/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&idx=${ row.idx }">[Down]</a>
-                </c:if>
-                </td>
+                
             </tr>
             </c:forEach>        
         </c:otherwise>    
@@ -257,7 +253,7 @@
         <div>
             ${ map.pagingImg }
         </div>
-        <button type="button" onclick="location.href='../board/write.do';">
+        <button type="button" onclick="location.href='../board/freeboardwrite.do';">
             글쓰기
         </button>
     </div>

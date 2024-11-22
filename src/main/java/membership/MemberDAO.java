@@ -58,6 +58,13 @@ public class MemberDAO extends JDBConnect {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (psmt != null) psmt.close();
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         // 회원정보를 저장한 DTO객체를 반환한다.
         return dto;
@@ -91,4 +98,69 @@ public class MemberDAO extends JDBConnect {
         return result;
     }
 
+    // 회원정보 수정을 위한 update 메서드 추가
+    public int updateMember(MemberDTO dto) {
+        int result = 0;
+        PreparedStatement psmt = null;
+
+        String query = "UPDATE users SET password=?, name=?, email=?, phone=?, updated_at=SYSDATE WHERE username=?";
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, dto.getPassword());
+            psmt.setString(2, dto.getName());
+            psmt.setString(3, dto.getEmail());
+            psmt.setString(4, dto.getPhone());
+            psmt.setString(5, dto.getUsername());
+
+            result = psmt.executeUpdate(); // 실행 후 수정된 행 수 반환
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (psmt != null) psmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+    
+    public MemberDTO getMemberDTO(String uid) {
+        // 회원 정보를 저장하기 위한 인스턴스 생성
+        MemberDTO dto = new MemberDTO();
+        
+        // 사용자 ID로 회원 정보를 조회하는 쿼리 작성
+        String query = "SELECT * FROM users WHERE username=?";
+
+        try {
+            // 쿼리문 실행을 위한 prepared 인스턴스 생성
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, uid);
+            
+            // 쿼리문 실행 및 결과는 ResultSet으로 반환받는다.
+            rs = psmt.executeQuery();
+            
+            // 반환된 ResultSet객체에 정보가 저장되어 있는지 확인한다.
+            if (rs.next()) {
+                dto.setUsername(rs.getString("username"));
+                dto.setPassword(rs.getString("password"));
+                dto.setName(rs.getString("name"));
+                dto.setEmail(rs.getString("email"));
+                dto.setPhone(rs.getString("phone"));
+                dto.setCreated_at(rs.getDate("created_at"));
+                dto.setUpdated_at(rs.getDate("updated_at"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (psmt != null) psmt.close();
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        // 회원정보를 저장한 DTO객체를 반환한다.
+        return dto;
+    }
 }

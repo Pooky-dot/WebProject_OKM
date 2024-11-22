@@ -113,8 +113,15 @@
     <url-pattern>/board/freeboardwrite.do</url-pattern>
 </servlet-mapping>
 
+<servlet>
+    <servlet-name>MemberEditController</servlet-name>
+    <servlet-class>membership.MemberEditController</servlet-class>
+</servlet>
 
-
+<servlet-mapping>
+    <servlet-name>MemberEditController</servlet-name>
+    <url-pattern>/membership/MemberEditController.do</url-pattern>
+</servlet-mapping>
 
 
 

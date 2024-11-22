@@ -14,8 +14,8 @@
   <meta name="author" content="" />
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.png" type="">
 
-  <title>Feane - 자유게시판 글쓰기</title>
-
+  <title>Feane - 자유게시판 글쓰기</title>    
+    
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css" />
 
@@ -180,7 +180,7 @@
   <!-- Content Section: 글쓰기 -->
   <div class="content_section container">
     <h2>자유게시판 글쓰기</h2>
-    <form name="writeFrm" method="post" action="../freeboardWrite.do" onsubmit="return validateForm(this);">
+    <form name="writeFrm" method="post" action="../board/freeboardwrite.do" onsubmit="return validateForm(this);">
       <table class="form_table">
         <tr>
           <th>제목</th>
