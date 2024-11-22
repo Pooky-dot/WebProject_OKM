@@ -47,21 +47,29 @@ public class MemberEditController extends HttpServlet {
         MemberDAO dao = new MemberDAO(getServletContext());
         int result = dao.updateMember(member);
 
+        // 회원 정보를 세션에 저장 (응답 전 수행)
+        if (result > 0) {
+            session.setAttribute("member", member);
+        }
+
         // PrintWriter를 사용해 자바스크립트로 응답
         resp.setContentType("text/html; charset=UTF-8");
         PrintWriter out = resp.getWriter();
 
         if (result > 0) {
+            // 수정 성공 시 알림창을 띄우고 회원 정보 상세 보기 페이지로 이동
             out.println("<script>");
             out.println("alert('회원 정보가 성공적으로 수정되었습니다!');");
-            out.println("location.href='/memberEdit/MemberDetail.jsp';"); // 수정 성공 시 마이페이지로 이동
+            out.println("location.href='../memberEdit/MemberDetail.jsp';");
             out.println("</script>");
+            out.close();
         } else {
+            // 수정 실패 시 알림창을 띄우고 이전 페이지로 돌아가기
             out.println("<script>");
             out.println("alert('회원 정보 수정에 실패했습니다. 다시 시도해주세요.');");
-            out.println("history.back();"); // 수정 실패 시 이전 페이지(수정 폼)로 돌아가기
+            out.println("history.back();");
             out.println("</script>");
+            out.close();
         }
-        out.close();
     }
 }
