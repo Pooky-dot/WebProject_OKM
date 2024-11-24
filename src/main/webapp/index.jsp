@@ -45,7 +45,7 @@
   <div class="container">
     <nav class="navbar navbar-expand-lg custom_nav-container">
       <a class="navbar-brand" href="index.jsp">
-        <span>어딜강</span>
+        <span>Feane</span>
       </a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,14 +66,16 @@
           <li class="nav-item">
             <a class="nav-link" href="book.jsp">Book Table</a>
           </li>
-          <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="" id="boardDropdown" data-toggle="dropdown">게시판</a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="./board/freeboard.do">자유게시판</a>
-                  <a class="dropdown-item" href="./board/qnaBoard.jsp">Q&A게시판</a>
-                  <a class="dropdown-item" href="./board/listPage.do">자료게시판</a>
-                </div>
-              </li>
+         <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="boardDropdown" data-toggle="dropdown">게시판</a>
+  <div class="dropdown-menu">
+    
+    <a class="dropdown-item" href="./board/freeboard.do">자유게시판</a>
+    <a class="dropdown-item" href="./qnaPost.do">Q&A게시판</a>
+    <a class="dropdown-item" href="./board/listPage.do">자료게시판</a>
+  </div>
+</li>
+
         </ul>
 
         <% 
@@ -83,13 +85,14 @@
 
         <!-- 로그인 상태에 따라 버튼 표시 -->
         <div class="user_option">
-          <% if (loggedInUser != null) { %>
-              <a href="memberEdit/MemberDetail.jsp" class="order_online" style="margin-right: 15px;">마이페이지</a>
-              <a href="login/logout.jsp" class="order_online" style="margin-right: 15px;">로그아웃</a>
-          <% } else { %>
-              <a href="login/login.jsp" class="order_online" style="margin-right: 15px;">로그인</a>
-              <a href="signup/signup.jsp" class="order_online">회원가입</a>
-          <% } %>
+         <% if (loggedInUser != null) { %>
+    <a href="memberEdit/MemberDetail.jsp" class="order_online" style="margin-right: 15px;">마이페이지</a>
+    <a href="login/logout.jsp" class="order_online" style="margin-right: 15px;">로그아웃</a>
+<% } else { %>
+    <a href="login/login.jsp" style="margin-right: 15px; color: white; text-decoration: none;">로그인</a>
+    <a href="signup/signup.jsp" class="order_online">회원가입</a>
+<% } %>
+
         </div>
       </div>
     </nav>

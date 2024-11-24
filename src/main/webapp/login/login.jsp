@@ -1,4 +1,6 @@
+<%@page import="utils.CookieManager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,20 +90,22 @@
             %>
 
             <!-- 로그인 상태에 따라 버튼 표시 -->
-            <div class="user_option">
-              <% if (loggedInUser != null) { %>
-                <a href="../login/logout.jsp" class="order_online" style="margin-right: 15px;">
-                    로그아웃
-                </a>
-              <% } else { %>
-                <a href="../login/login.jsp" class="order_online" style="margin-right: 15px;">
-                    로그인
-                </a>
-                <a href="../signup/signup.jsp" class="order_online">
-                    회원가입
-                </a>
-              <% } %>
-            </div>
+            <!-- 로그인 상태에 따라 버튼 표시 -->
+<div class="user_option">
+  <% if (loggedInUser != null) { %>
+    <a href="../login/logout.jsp" class="order_online" style="margin-right: 15px;">
+      로그아웃
+    </a>
+  <% } else { %>
+    <a href="../login/login.jsp" style="margin-right: 15px; color: white; text-decoration: none;">
+      로그인
+    </a>
+    <a href="../signup/signup.jsp" class="order_online">
+      회원가입
+    </a>
+  <% } %>
+</div>
+
           </div>
         </nav>
       </div>
@@ -120,15 +124,20 @@
 
     <% 
     // 세션에 사용자 정보가 없는 경우 로그인 폼 출력
-    if (session.getAttribute("UserId") == null) { 
+    if (session.getAttribute("UserId") == null) {
+        // 쿠키에 저장된 아이디 값을 가져오기
+        String savedId = CookieManager.readCookie(request, "savedId");
     %>
       <form method="post" action="loginProcess.jsp" onsubmit="return validateForm(this);">
-
         <div class="form-group">
-          <input type="text" class="form-control" id="user_id" name="user_id" placeholder="아이디 입력" required>
+          <input type="text" class="form-control" id="user_id" name="user_id" placeholder="아이디 입력" value="<%= savedId %>" required>
         </div>
         <div class="form-group">
           <input type="password" class="form-control" id="user_pw" name="user_pw" placeholder="비밀번호 입력" required>
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="saveId" name="saveId" <%= (savedId != null && !savedId.isEmpty()) ? "checked" : "" %> >
+          <label class="form-check-label" for="saveId">아이디 저장하기</label>
         </div>
         <button type="submit" class="btn btn-primary">로그인</button>
       </form>

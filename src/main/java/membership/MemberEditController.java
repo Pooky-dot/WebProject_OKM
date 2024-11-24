@@ -20,7 +20,6 @@ public class MemberEditController extends HttpServlet {
         // 로그인 여부 확인
         HttpSession session = req.getSession();
         if (session.getAttribute("UserId") == null) {
-            // 로그인하지 않은 경우 경고창 띄우고 로그인 페이지로 이동
             JSFunction.alertLocation(resp, "로그인 후 이용해주세요.", "../login/login.jsp");
             return;
         }
@@ -29,7 +28,7 @@ public class MemberEditController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         // 폼 데이터 받기
-        String username = (String) session.getAttribute("UserId"); // 세션에서 아이디 가져옴
+        String username = (String) session.getAttribute("UserId");
         String password = req.getParameter("password");
         String name = req.getParameter("name");
         String email = req.getParameter("email");
@@ -47,9 +46,13 @@ public class MemberEditController extends HttpServlet {
         MemberDAO dao = new MemberDAO(getServletContext());
         int result = dao.updateMember(member);
 
-        // 회원 정보를 세션에 저장 (응답 전 수행)
+        // 업데이트 성공 시 데이터베이스에서 최신 회원 정보 가져와 세션에 저장
         if (result > 0) {
-            session.setAttribute("member", member);
+            // 업데이트 성공 후 데이터베이스에서 최신 정보 가져오기
+            MemberDTO updatedMember = dao.getMemberDTO(username);
+            if (updatedMember != null) {
+                session.setAttribute("member", updatedMember); // 최신 정보 세션에 저장
+            }
         }
 
         // PrintWriter를 사용해 자바스크립트로 응답
@@ -57,19 +60,16 @@ public class MemberEditController extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         if (result > 0) {
-            // 수정 성공 시 알림창을 띄우고 회원 정보 상세 보기 페이지로 이동
             out.println("<script>");
             out.println("alert('회원 정보가 성공적으로 수정되었습니다!');");
             out.println("location.href='../memberEdit/MemberDetail.jsp';");
             out.println("</script>");
-            out.close();
         } else {
-            // 수정 실패 시 알림창을 띄우고 이전 페이지로 돌아가기
             out.println("<script>");
             out.println("alert('회원 정보 수정에 실패했습니다. 다시 시도해주세요.');");
             out.println("history.back();");
             out.println("</script>");
-            out.close();
         }
+        out.close();
     }
 }

@@ -123,6 +123,15 @@
     <url-pattern>/membership/MemberEditController.do</url-pattern>
 </servlet-mapping>
 
+<servlet>
+    <servlet-name>QnaPostController</servlet-name>
+    <servlet-class>qnaBoard.QnaPostController</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>QnaPostController</servlet-name>
+    <url-pattern>/qnaPost.do</url-pattern>
+</servlet-mapping>
+
 
 
 

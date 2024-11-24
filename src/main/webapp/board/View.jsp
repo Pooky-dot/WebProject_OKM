@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <!DOCTYPE html>
 <html>
 
@@ -115,7 +116,7 @@
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container">
           <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">
-            <span>어딜강</span>
+            <span>Feane</span>
           </a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -205,22 +206,39 @@
           <td>${dto.title}</td>
         </tr>
         <tr>
-    <th>내용</th>
-    <td>
-        <div style="width: 90%; min-height: 150px; padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;">
-            ${dto.content}
-        </div>
-    </td>
-</tr>
-
+          <th>내용</th>
+          <td>
+            <div style="width: 90%; min-height: 150px; padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9;">
+              ${dto.content}
+            </div>
+          </td>
+        </tr>
         <tr>
           <th>첨부파일</th>
           <td>
             <c:if test="${not empty dto.ofile}">
-              ${dto.ofile}
-              <a href="../board/download.do?ofile=${dto.ofile}&sfile=${dto.sfile}&idx=${dto.idx}">
-                [다운로드]
-              </a>
+              <c:set var="fileExtension" value="${fn:substringAfter(dto.ofile, '.')}" />
+              <c:choose>
+                <c:when test="${fileExtension == 'png' || fileExtension == 'jpg' || fileExtension == 'jpeg' || fileExtension == 'gif'}">
+                  <img src="../Uploads/${dto.sfile}" alt="첨부 이미지" style="max-width:100%;">
+                </c:when>
+                <c:when test="${fileExtension == 'mp4' || fileExtension == 'avi'}">
+                  <video controls style="max-width:100%;">
+                    <source src="../Uploads/${dto.sfile}" type="video/${fileExtension}">
+                  </video>
+                </c:when>
+                <c:when test="${fileExtension == 'mp3'}">
+                  <audio controls>
+                    <source src="../Uploads/${dto.sfile}" type="audio/${fileExtension}">
+                  </audio>
+                </c:when>
+                <c:otherwise>
+                  ${dto.ofile}
+                  <a href="../board/download.do?ofile=${dto.ofile}&sfile=${dto.sfile}&idx=${dto.idx}">
+                    [다운로드]
+                  </a>
+                </c:otherwise>
+              </c:choose>
             </c:if>
           </td>
         </tr>
